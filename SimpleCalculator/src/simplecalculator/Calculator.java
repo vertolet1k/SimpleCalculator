@@ -10,4 +10,8 @@ package simplecalculator;
  */
 public class Calculator {
     
+    public double power(float num, float num_power){
+        return Math.pow(num, num_power);
+    }
+    
 }
