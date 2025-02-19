@@ -10,6 +10,7 @@ package simplecalculator;
  */
 public class Calculator {
     
+
     
     public double multiply(double a, double b){
         return a*b;
@@ -21,4 +22,10 @@ public class Calculator {
         } else
             return a/b;
     }
+
+    public double power(float num, float num_power){
+        return Math.pow(num, num_power);
+    }
+    
+
 }
