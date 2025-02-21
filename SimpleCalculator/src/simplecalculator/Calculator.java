@@ -9,30 +9,30 @@ package simplecalculator;
  * @author vika
  */
 public class Calculator {
-    public double add(double a, double b) {
-        return a+b;
+    public static String add(double a, double b) {
+        return Double.toString(a+b);
     }
     
 
-    public double substract(double a, double b) {
-        return a-b;
+    public static String substract(double a, double b) {
+        return Double.toString(a-b);
     }
 
 
     
-    public double multiply(double a, double b){
-        return a*b;
+    public static String multiply(double a, double b){
+        return Double.toString(a*b);
     }
     
-    public double divide(double a, double b){
+    public static String divide(double a, double b){
         if (b==0){
-            return 0;
+            return "ERROR";
         } else
-            return a/b;
+            return Double.toString(a/b);
     }
 
-    public double power(float num, float num_power){
-        return Math.pow(num, num_power);
+    public static String power(double num, double num_power){
+        return Double.toString(Math.pow(num, num_power));
     }
     
 

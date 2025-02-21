@@ -4,6 +4,8 @@
  */
 package simplecalculator;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lihac
@@ -15,6 +17,23 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+    }
+    
+    public boolean emptyString(String str) {
+        if (str.trim().equals("")) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean parsing(String str) {
+        try {
+            double price = Double.parseDouble(str);
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -36,17 +55,23 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("number 1");
 
-        jLabel2.setText("number 2");
+        jLabel2.setText("number 2/power");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -58,20 +83,42 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButton2.setText("-");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("^");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("x");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("/");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
+        jTextField3.setEditable(false);
+        jTextField3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Show result");
+        jLabel3.setText("result:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,11 +133,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jButton5))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
-                                .addComponent(jButton6))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jButton1)
@@ -100,14 +143,16 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(56, 56, 56)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                            .addComponent(jTextField2)
                                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3)))))))
-                .addContainerGap(102, Short.MAX_VALUE))
+                                        .addComponent(jButton3))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3))))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,11 +174,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,12 +189,92 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String str1 = jTextField1.getText();
+        String str2 = jTextField2.getText();
+        if (emptyString(str1) & parsing(str1)) {
+            if (emptyString(str2) & parsing(str2)) {
+                jTextField3.setText(Calculator.add(Double.parseDouble(str1),Double.parseDouble(str2)));
+            }
+            else {
+                JOptionPane.showMessageDialog(this,"Enter the correct values for number 2", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+                JOptionPane.showMessageDialog(this, "Enter the correct values for number 1", "Error", JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String str1 = jTextField1.getText();
+        String str2 = jTextField2.getText();
+        if (emptyString(str1) & parsing(str1)) {
+            if (emptyString(str2) & parsing(str2)) {
+                jTextField3.setText(Calculator.substract(Double.parseDouble(str1),Double.parseDouble(str2)));
+            }
+            else {
+                JOptionPane.showMessageDialog(this,"Enter the correct values for number 2", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+                JOptionPane.showMessageDialog(this, "Enter the correct values for number 1", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String str1 = jTextField1.getText();
+        String str2 = jTextField2.getText();
+        if (emptyString(str1) & parsing(str1)) {
+            if (emptyString(str2) & parsing(str2)) {
+                jTextField3.setText(Calculator.power(Double.parseDouble(str1),Double.parseDouble(str2)));
+            }
+            else {
+                JOptionPane.showMessageDialog(this,"Enter the correct values for power", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+                JOptionPane.showMessageDialog(this, "Enter the correct values for number 1", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String str1 = jTextField1.getText();
+        String str2 = jTextField2.getText();
+        if (emptyString(str1) & parsing(str1)) {
+            if (emptyString(str2) & parsing(str2)) {
+                jTextField3.setText(Calculator.multiply(Double.parseDouble(str1),Double.parseDouble(str2)));
+            }
+            else {
+                JOptionPane.showMessageDialog(this,"Enter the correct values for number 2", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+                JOptionPane.showMessageDialog(this, "Enter the correct values for number 1", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String str1 = jTextField1.getText();
+        String str2 = jTextField2.getText();
+        if (emptyString(str1) & parsing(str1)) {
+            if (emptyString(str2) & parsing(str2)) {
+                jTextField3.setText(Calculator.divide(Double.parseDouble(str1),Double.parseDouble(str2)));
+            }
+            else {
+                JOptionPane.showMessageDialog(this,"Enter the correct values for number 2", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+                JOptionPane.showMessageDialog(this, "Enter the correct values for number 1", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,9 +317,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
